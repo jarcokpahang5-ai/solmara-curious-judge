@@ -1,25 +1,27 @@
-"""solmara-curious-judge: a short text that leaves its reader curious.
-
-Writes one short text (1-280 Unicode characters) to
-$MAKEFUN_OUTPUT_DIR/entry.txt (default /output/entry.txt).
+#!/usr/bin/env python3
+"""Write a short curious text for the make.fun bounty
+"Make the AI judge feel curious".
 
 Pure Python 3 standard library, deterministic, no network.
+Reads the output directory from MAKEFUN_OUTPUT_DIR
+(default /output) and writes one text (1-280 Unicode
+characters) to entry.txt there.
 """
 
 import os
 
 TEXT = (
-    "The lighthouse keeper kept the lamp burning for forty years after the "
-    "harbor silted shut and the last ship turned away. On the final page of "
-    "his log, beneath forty years of his own handwriting, a different hand "
-    "had written, in pencil: tomorrow, the tide comes back."
+    "Somewhere in a house that was never built, a window was left open. "
+    "Through it drifts a song no one wrote, in a voice that sounds almost "
+    "like yours. It stops the moment you try to hum along \u2014 then waits, "
+    "patient as dust in sunlight, for you to forget it was ever there."
 )
 
 
 def main() -> None:
-    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    os.makedirs(output_dir, exist_ok=True)
-    path = os.path.join(output_dir, "entry.txt")
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    path = os.path.join(out_dir, "entry.txt")
+    os.makedirs(out_dir, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(TEXT + "\n")
 
